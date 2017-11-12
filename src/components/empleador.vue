@@ -3,10 +3,10 @@
     <div class="contenido">
       <h3>Nueva Empresa</h3>
       <input v-model="empleador.nombreEmpresa" type="text"  placeholder="Nombre">
-      <input v-model="empleador.rtn"  type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="RTN ">
+      <input v-model="empleador.rtn" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="13" maxlength="13" placeholder="RTN ">
       <input v-model="empleador.ceo" type="text"  placeholder="CEO ">
       <input v-model="empleador.Direccion" type="text" placeholder="Direccion ">
-      <input v-model="empleador.Telefono" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Numero de Telefono">
+      <input v-model="empleador.Telefono" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="8" maxlength="8" placeholder="Numero de Telefono">
       <a name="empleador.aceptar" class="waves-effect waves-light btn" v-on:click="CreoEmpresa()">  Aceptar</a>
 
     </div>
@@ -31,14 +31,24 @@ export default {
     CreoEmpresa:function(){
       const {nombreEmpresa,rtn,ceo,Direccion,Telefono} = this.empleador;
       // alert("Nombre Empresa: " + nombreEmpresa + "RTN: "+rtn);
-      if(this.empleador.nombreEmpresa===""&&this.empleador.rtn===""&&this.empleador.ceo===""&&this.empleador.Direccion===""&&this.empleador.Telefono===""){
-        sweetAlert( "Oopsie" ,  "Un campo esta vacio!" ,  "error" )
+      if(this.empleador.nombreEmpresa.length===0 &&this.empleador.ceo.length===0 &&this.empleador.Direccion.length===0){
+        Materialize.toast('Un campo esta vacio!', 3000)
+      }else if (this.empleador.rtn.length != 13) {
+        // alert("length must be exactly 13 characters")
+        Materialize.toast('RTN debe contener 13 numeros', 3000)
+      }else if(this.empleador.Telefono.length !=8){
+        Materialize.toast('Numero de telefono invalido!', 3000)
       }else{
       sweetAlert(
         'Good job!',
         'You clicked the button!',
         'success'
       )
+      this.empleador.nombreEmpresa="";
+      this.empleador.rtn="";
+      this.empleador.ceo="";
+      this.empleador.Direccion="";
+      this.empleador.Telefono="";
     }
       this.$http.post("http://localhost:8000/newempleador", this.empleador).then((res)=>{
         if (res.body.success === true) {
