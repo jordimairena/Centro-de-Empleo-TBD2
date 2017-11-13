@@ -68,32 +68,37 @@
 
       </div>
 
-      <div class="education">
-        <div class="primaria">
+      <div class="row">
+        <div class="primaria col s12 m6 l6 xl6">
           <p>Educacion Primaria</p>
           <input type="text" placeholder="Promedio">
           <input type="text" placeholder="Centro de Estudio">
         </div>
 
-        <div class="secundaria">
+        <div class="secundaria col s12 m6 l6 xl6">
           <p>Educacion Secundaria</p>
           <input type="text" placeholder="Promedio">
           <input type="text" placeholder="Centro de Estudios">
           <input type="text" placeholder="Carrera">
         </div>
+      </div>
 
-        <div class="universidad">
+      <div class="row">
+        <div class="universidad col s12 m6 l6 xl6">
           <p>Educacion Universitaria</p>
           <input type="text" placeholder="Promedio">
           <input type="text" placeholder="Centro de Estudios">
           <input type="text" placeholder="Carrera">
         </div>
 
-        <input type="radio" id="mas">
-        <label for="mas">Mas...</label>
+        <div class="mas col s12 m6 l6 xl6">
+          <input type="radio" id="mas">
+          <label for="mas">Mas...</label>
+        </div>
       </div>
 
       <div class="experiencia">
+        <p>Experiencia Laboral</p>
         <table id="exp">
           <thead>
             <tr>
@@ -109,7 +114,10 @@
               <td contenteditable="true">Inserte</td>
               <td contenteditable="true">Inserte</td>
             </tr>
-            <a class="btn-floating btn-large waves-effect waves-light"><i class="material-icons" v-on:click="addRow()">+</i></a>
+            <div class="more">
+              <a class="btn-floating btn-large waves-effect waves-light"><i class="material-icons" v-on:click="addRow()">+</i></a>
+            </div>
+
           </tbody>
         </table>
       </div>
@@ -200,4 +208,46 @@ h1{
   padding-left: 0%;
   padding-right: 20%;
 }
+
+.antecedentes{
+  padding-right: 10%!important;
+}
+
+.mas{
+  margin-top: 5%;
+}
+
+.primaria{
+  padding-left: 5%!important;
+}
+
+.secundaria{
+  padding-right: 10%!important;
+}
+
+.universidad{
+  padding-left: 5%!important;
+}
+
+.experiencia{
+  padding-left: 5%;
+  padding-right: 10%;
+}
+
+.more{
+  margin-top: 10%;
+  margin-left: 220%;
+}
+
+.requisito{
+  margin-left: 5%;
+  margin-right: 10%;
+  margin-bottom: 5%;
+}
+
+.boton{
+  margin-top: 0%;
+  padding-bottom: 10%;
+}
+
 </style>
