@@ -39,56 +39,21 @@ export default {
       }else if(this.empleador.Telefono.length !=8){
         Materialize.toast('Numero de telefono invalido!', 3000)
       }else{
-      sweetAlert(
-        'Good job!',
-        'You clicked the button!',
-        'success'
-      )
-      this.empleador.nombreEmpresa="";
-      this.empleador.rtn="";
-      this.empleador.ceo="";
-      this.empleador.Direccion="";
-      this.empleador.Telefono="";
+        sweetAlert(
+          'Good job!',
+          'You clicked the button!',
+          'success'
+        )
+        this.empleador.nombreEmpresa="";
+        this.empleador.rtn="";
+        this.empleador.ceo="";
+        this.empleador.Direccion="";
+        this.empleador.Telefono="";
+      }
     }
-      this.$http.post("http://localhost:8000/newempleador", this.empleador).then((res)=>{
-        if (res.body.success === true) {
-          localStorage.setItem("Ceo", ceo);
-          //Propongo usar scopes "empleado" o "empresa"
-          if (res.body.scope[0] === "empleado") {
-            this.userLogin.identidad = "";
-            this.userLogin.password = "";
-
-            sweetAlert(
-              'Good job!',
-              'You clicked the button!',
-              'success'
-            )
-
-            //Redireccionar al home del empleado
-          }else if(res.body.scope[0] === "empresa"){
-            this.userLogin.identidad = "";
-            this.userLogin.password = "";
-
-            sweetAlert(
-              'Good job!',
-              'You clicked the button!',
-              'success'
-            )
-
-            //Redireccionar al home de la empresa
-          }
-        }else if(res.body.success === false) {
-          sweetAlert(
-            'Oops...',
-            'Usuario o contraseña incorrectos',
-            'error'
-          )
-
-        }
-      });
-    }
-  },
+  }
 }
+
 </script>
 
 <style lang="css">
