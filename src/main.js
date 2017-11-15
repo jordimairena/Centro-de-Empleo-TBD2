@@ -6,6 +6,7 @@ import VueResouce from 'vue-resource'
 //Componentes
 import App from './App.vue'
 import login from './components/login.vue'
+import dashboard from './components/dashboard.vue'
 
 Vue.use(VueResouce);
 Vue.use(VueRouter);
@@ -14,6 +15,10 @@ Vue.http.options.credentials = true;
 const router = new VueRouter({
   routes:[
     {
+      name: 'Dashboard',
+      path: '/home',
+      component: dashboard
+    },{
       name: 'LogIn',
       path: '/',
       component: login

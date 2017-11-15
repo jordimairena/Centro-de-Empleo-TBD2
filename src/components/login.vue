@@ -1,20 +1,22 @@
 <template lang="html">
-  <div class="login-page">
-    <div class="form">
-      <H1>Empleos</H1>
-      <form class="register-form">
-        <input v-model="userSignin.nombre" type="text" placeholder="Nombre">
-        <input v-model="userSignin.identidad" type="text" placeholder="Identidad">
-        <input v-model="userSignin.password" type="password" placeholder="Contraseña">
-        <button>CREAR</button>
-        <p class="message">Ya estas registrado? <a href="#" v-on:click="clickCrearCuenta()">Inicia Sesion!</a></p>
-      </form>
-      <form class="login-form">
-        <input v-model="userLogin.identidad" type="text" placeholder="Identidad">
-        <input v-model="userLogin.password" type="password" placeholder="Contraseña">
-        <button v-on:click="LogIn()">Iniciar Sesión</button>
-        <p class="message">No estas registrado? <a href="#" v-on:click="clickCrearCuenta()">Crea una cuenta</a></p>
-      </form>
+  <div class="wrapper-login">
+    <div class="login-page">
+      <div class="form">
+        <H1>Empleos</H1>
+        <form class="register-form">
+          <input v-model="userSignin.nombre" type="text" placeholder="Nombre">
+          <input v-model="userSignin.identidad" type="text" placeholder="Identidad">
+          <input v-model="userSignin.password" type="password" placeholder="Contraseña">
+          <button>CREAR</button>
+          <p class="message">Ya estas registrado? <a href="#" v-on:click="clickCrearCuenta()">Inicia Sesion!</a></p>
+        </form>
+        <form class="login-form">
+          <input v-model="userLogin.identidad" type="text" placeholder="Identidad">
+          <input v-model="userLogin.password" type="password" placeholder="Contraseña">
+          <button v-on:click="LogIn()">Iniciar Sesión</button>
+          <p class="message">No estas registrado? <a href="#" v-on:click="clickCrearCuenta()">Crea una cuenta</a></p>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -91,7 +93,8 @@ export default {
 }
 </script>
 
-<style lang="css">
+
+<style lang="css" scoped>
   .login-page{
     width: 420px;
     padding: 8% 0 0;
@@ -113,11 +116,12 @@ export default {
     outline: 0;
     background: #f2f2f2;
     width: 100%;
-    border: 0;
+    /*border: 0;*/
     margin: 0 0 15px;
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
+    font-weight: bold;
   }
 
   .form button{
@@ -153,7 +157,8 @@ export default {
     display: none;
   }
 
-  body{
+  .wrapper-login{
     background: #76b852;
+    height: 100vh;
   }
 </style>
