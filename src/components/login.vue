@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="wrapper-login">
     <div class="login-page">
-      <div class="form">
+      <div class="form-login">
         <H1>Empleos</H1>
         <form class="register-form">
           <input v-model="userSignin.nombre" type="text" placeholder="Nombre">
@@ -101,7 +101,7 @@ export default {
     margin: auto;
   }
 
-  .form{
+  .form-login{
     position: relative;
     z-index: 1;
     background: #FFFFFF;
@@ -112,7 +112,7 @@ export default {
     box-shadow: 10px 10px 5px #888888;
   }
 
-  .form input{
+  .form-login input{
     outline: 0;
     background: #f2f2f2;
     width: 100%;
@@ -124,7 +124,7 @@ export default {
     font-weight: bold;
   }
 
-  .form button{
+  .form-login button{
     outline: 0;
     background: #4CAF50;
     width: 100%;
@@ -136,24 +136,24 @@ export default {
     cursor: pointer;
   }
 
-  .form button:hover,
-  .form button:active,
-  .form button:focus {
+  .form-login button:hover,
+  .form-login button:active,
+  .form-login button:focus {
     background: #43A047;
   }
 
-  .form .message{
+  .form-login .message{
     margin: 15px 0 0;
     color: #b3b3b3;
     font-size: 12px;
   }
 
-  .form .message a {
+  .form-login .message a {
     color: #4CAF50;
     text-decoration: none;
   }
 
-  .form .register-form{
+  .form-login .register-form{
     display: none;
   }
 
