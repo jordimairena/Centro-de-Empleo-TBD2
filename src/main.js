@@ -7,6 +7,7 @@ import VueResouce from 'vue-resource'
 import App from './App.vue'
 import login from './components/login.vue'
 import empleado from './components/empleado.vue'
+import udEmpleado from './components/udEmpleado.vue'
 
 Vue.use(VueResouce);
 Vue.use(VueRouter);
@@ -23,6 +24,11 @@ const router = new VueRouter({
       name: 'empleado',
       path: '/newempleado',
       component: empleado
+    },
+    {
+      name: 'udempleado',
+      path: '/updatempleado',
+      component: udEmpleado
     },
   ]
 })
