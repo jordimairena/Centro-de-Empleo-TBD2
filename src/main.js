@@ -23,7 +23,7 @@ const router = new VueRouter({
       name: 'modificarempleador',
       path: '/modificarempleador',
       component: modificarempleador
-    }
+    },
   ]
 })
 

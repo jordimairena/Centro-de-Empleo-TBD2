@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="lol">
+  <div class="form-empleador">
     <div class="contenido">
       <h3>Modificar Empresa</h3>
       <input name="modificarempleador.nombreEmpresa" type="text"  placeholder="Nombre">
@@ -29,7 +29,7 @@ export default {
     text-align: top center;
     box-shadow: 10px 10px 5px #888888;
   }
-  .lol{
+  .form-empleador{
     margin: 0;
   }
   body{
