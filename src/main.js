@@ -9,7 +9,6 @@ import login from './components/login.vue'
 import dashboard from './components/dashboard.vue'
 import empleado from './components/empleado.vue'
 import udEmpleado from './components/udEmpleado.vue'
-
 import modificarempleador from './components/modificarempleador.vue'
 
 Vue.use(VueResouce);

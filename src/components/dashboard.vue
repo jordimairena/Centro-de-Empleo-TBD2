@@ -42,7 +42,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style>
 .ofertas-disponibles{
   overflow: auto;
   max-height: 300px;

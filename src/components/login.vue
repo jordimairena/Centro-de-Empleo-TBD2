@@ -2,7 +2,7 @@
   <div class="wrapper-login">
     <div class="login-page">
       <div class="form-login">
-        <H1>Empleos</H1>
+        <h1>Empleos</h1>
         <form class="register-form">
           <input v-model="userSignin.nombre" type="text" placeholder="Nombre">
           <input v-model="userSignin.identidad" type="text" placeholder="Identidad">
@@ -94,7 +94,7 @@ export default {
 </script>
 
 
-<style lang="css" scoped>
+<style scoped>
   .login-page{
     width: 420px;
     padding: 8% 0 0;
