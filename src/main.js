@@ -24,6 +24,16 @@ const router = new VueRouter({
       path: '/modificarempleador',
       component: modificarempleador
     },
+    {
+      name: 'empleado',
+      path: '/newempleado',
+      component: empleado
+    },
+    {
+      name: 'udempleado',
+      path: '/updatempleado',
+      component: udEmpleado
+    },
   ]
 })
 
