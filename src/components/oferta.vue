@@ -95,6 +95,10 @@
       </select>
     </div>
 
+    <div class="boton">
+      <a class="waves-effect waves-light btn">Crear Oferta de Trabajo</a>
+      <a class="waves-effect waves-light btn red">Cancelar</a>
+    </div>
   </div>
 
 </template>
@@ -173,6 +177,10 @@ h1{
 .contrato{
   margin-left: 10%;
   margin-right: 10%;
+}
+
+.boton{
+  margin-left: 25%;
   padding-bottom: 5%;
 }
 
