@@ -8,12 +8,12 @@
           <input v-model="userSignin.identidad" type="text" placeholder="Identidad">
           <input v-model="userSignin.password" type="password" placeholder="Contraseña">
           <div class="radiobotones-signup">
-            <input type="radio" name="radio-empleado" id="radio-empleado">
+            <input v-model="userSignin.scope" type="radio" name="radio-empleado" id="radio-empleado">
             <label for="radio-empleado">Empleado</label>
-            <input type="radio" name="radio-empleado" id="radio-empleador">
+            <input v-model="userSignin.scope" type="radio" name="radio-empleado" id="radio-empleador">
             <label for="radio-empleador">Empleador</label>
           </div>
-          <button>CREAR</button>
+          <button v-on:click="SignUp()">CREAR</button>
           <p class="message">Ya estas registrado? <a href="#" v-on:click="clickCrearCuenta()">Inicia Sesion!</a></p>
         </form>
         <form class="login-form">
@@ -39,7 +39,8 @@ export default {
       userSignin:{
         identidad:"",
         nombre:"",
-        password:""
+        password:"",
+        scope:""
       }
     }
   },
@@ -94,6 +95,27 @@ export default {
           this.userLogin.password = "";
         }
       });
+    },SignUp:function(){
+      this.$http.post("http://localhost:8000/signup", this.userSignin).then((res) =>{
+        if (res.body.success === true) {
+
+          this.userSignin.nombre = "";
+          this.userSignin.identidad = "";
+          this.userSignin.password = "";
+
+          sweetAlert(
+            'Good job!',
+            'Bienvenido!',
+            'success'
+          )
+        } else if (res.body.success === false) {
+          sweetAlert(
+            'Oops...',
+            'Error!',
+            'error'
+          )
+        }
+      })
     }
   }
 }
