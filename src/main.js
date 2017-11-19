@@ -6,11 +6,13 @@ import VueResouce from 'vue-resource'
 //Componentes
 import App from './App.vue'
 import login from './components/login.vue'
+import oferta from './components/oferta.vue'
 import dashboard from './components/dashboard.vue'
 import empleado from './components/empleado.vue'
 import udEmpleado from './components/udEmpleado.vue'
 import modificarempleador from './components/modificarempleador.vue'
 import udOferta from './components/udOferta.vue'
+
 
 Vue.use(VueResouce);
 Vue.use(VueRouter);
@@ -26,6 +28,11 @@ const router = new VueRouter({
       name: 'LogIn',
       path: '/',
       component: login
+    },
+    {
+      name: 'Oferta',
+      path: '/newoferta',
+      component: oferta
     },
     {
       name: 'modificarempleador',
