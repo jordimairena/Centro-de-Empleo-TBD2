@@ -1,20 +1,28 @@
 <template lang="html">
-  <div class="login-page">
-    <div class="form">
-      <H1>Empleos</H1>
-      <form class="register-form">
-        <input v-model="userSignin.nombre" type="text" placeholder="Nombre">
-        <input v-model="userSignin.identidad" type="text" placeholder="Identidad">
-        <input v-model="userSignin.password" type="password" placeholder="Contraseña">
-        <button>CREAR</button>
-        <p class="message">Ya estas registrado? <a href="#" v-on:click="clickCrearCuenta()">Inicia Sesion!</a></p>
-      </form>
-      <form class="login-form">
-        <input v-model="userLogin.identidad" type="text" placeholder="Identidad">
-        <input v-model="userLogin.password" type="password" placeholder="Contraseña">
-        <button v-on:click="LogIn()">Iniciar Sesión</button>
-        <p class="message">No estas registrado? <a href="#" v-on:click="clickCrearCuenta()">Crea una cuenta</a></p>
-      </form>
+  <div class="wrapper-login">
+    <div class="login-page">
+      <div class="form-login">
+        <h1>Empleos</h1>
+        <form class="register-form">
+          <input v-model="userSignin.nombre" type="text" placeholder="Nombre">
+          <input v-model="userSignin.identidad" type="text" placeholder="Identidad">
+          <input v-model="userSignin.password" type="password" placeholder="Contraseña">
+          <div class="radiobotones-signup">
+            <input v-model="userSignin.scope" type="radio" name="radio-empleado" id="radio-empleado">
+            <label for="radio-empleado">Empleado</label>
+            <input v-model="userSignin.scope" type="radio" name="radio-empleado" id="radio-empleador">
+            <label for="radio-empleador">Empleador</label>
+          </div>
+          <button v-on:click="SignUp()">CREAR</button>
+          <p class="message">Ya estas registrado? <a href="#" v-on:click="clickCrearCuenta()">Inicia Sesion!</a></p>
+        </form>
+        <form class="login-form">
+          <input v-model="userLogin.identidad" type="text" placeholder="Identidad">
+          <input v-model="userLogin.password" type="password" placeholder="Contraseña">
+          <button v-on:click="LogIn()">Iniciar Sesión</button>
+          <p class="message">No estas registrado? <a href="#" v-on:click="clickCrearCuenta()">Crea una cuenta</a></p>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -31,7 +39,8 @@ export default {
       userSignin:{
         identidad:"",
         nombre:"",
-        password:""
+        password:"",
+        scope:""
       }
     }
   },
@@ -86,19 +95,41 @@ export default {
           this.userLogin.password = "";
         }
       });
+    },SignUp:function(){
+      this.$http.post("http://localhost:8000/signup", this.userSignin).then((res) =>{
+        if (res.body.success === true) {
+
+          this.userSignin.nombre = "";
+          this.userSignin.identidad = "";
+          this.userSignin.password = "";
+
+          sweetAlert(
+            'Good job!',
+            'Bienvenido!',
+            'success'
+          )
+        } else if (res.body.success === false) {
+          sweetAlert(
+            'Oops...',
+            'Error!',
+            'error'
+          )
+        }
+      })
     }
   }
 }
 </script>
 
-<style lang="css">
+
+<style scoped>
   .login-page{
     width: 420px;
     padding: 8% 0 0;
     margin: auto;
   }
 
-  .form{
+  .form-login{
     position: relative;
     z-index: 1;
     background: #FFFFFF;
@@ -109,18 +140,19 @@ export default {
     box-shadow: 10px 10px 5px #888888;
   }
 
-  .form input{
+  .form-login input{
     outline: 0;
     background: #f2f2f2;
     width: 100%;
-    border: 0;
+    /*border: 0;*/
     margin: 0 0 15px;
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
+    font-weight: bold;
   }
 
-  .form button{
+  .form-login button{
     outline: 0;
     background: #4CAF50;
     width: 100%;
@@ -132,28 +164,33 @@ export default {
     cursor: pointer;
   }
 
-  .form button:hover,
-  .form button:active,
-  .form button:focus {
+  .form-login button:hover,
+  .form-login button:active,
+  .form-login button:focus {
     background: #43A047;
   }
 
-  .form .message{
+  .form-login .message{
     margin: 15px 0 0;
     color: #b3b3b3;
     font-size: 12px;
   }
 
-  .form .message a {
+  .form-login .message a {
     color: #4CAF50;
     text-decoration: none;
   }
 
-  .form .register-form{
+  .form-login .register-form{
     display: none;
   }
 
-  body{
+  .wrapper-login{
     background: #76b852;
+    height: 100vh;
+  }
+
+  .radiobotones-signup{
+    margin: 5px auto;
   }
 </style>
