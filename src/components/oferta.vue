@@ -60,7 +60,7 @@
 
         <tbody>
           <tr v-for="(ros,index) in rows">
-            <td contenteditable="true">Inserte</td>
+            <td width="50%" contenteditable="true">Inserte</td>
             <td contenteditable="true">Inserte</td>
           </tr>
           <div class="more">
@@ -174,5 +174,9 @@ h1{
   margin-left: 10%;
   margin-right: 10%;
   padding-bottom: 5%;
+}
+
+#exp td{
+  word-wrap: break-word;
 }
 </style>
