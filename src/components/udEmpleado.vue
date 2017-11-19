@@ -161,10 +161,8 @@ export default {
       ],
     }
   },
-  beforeMount(){
-    $(document).ready(function() {
+  mounted(){
       $('select').material_select();
-    });
   },
   methods:{
     addRow:function(){
@@ -176,7 +174,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style>
 
 body{
   background-color: #76b852;
@@ -184,7 +182,8 @@ body{
 
 h1{
   padding-top: 5%!important;
-  /*font-family: 'Roboto Slab', serif;  */
+  padding-left: 20%;
+  font-family: 'Roboto Slab', serif;
 }
 
 .form{
@@ -249,6 +248,7 @@ h1{
 .boton{
   margin-top: 0%;
   padding-bottom: 10%;
+  padding-left: 30%;
 }
 
 </style>
