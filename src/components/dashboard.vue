@@ -38,11 +38,16 @@ export default {
     }
   }, methods:{
 
+  },mounted(){
+    $(document).ready(function(){
+      const height = $('.wrapper-dashboard').height() + $('.nav-wrapper').height()+50;
+      $('.wrapper-dashboard').css("height", height+"px");
+    });
   }
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .ofertas-disponibles{
   overflow: auto;
   max-height: 300px;
@@ -61,10 +66,10 @@ export default {
   color: red;
 }
 
-body{
+.wrapper-dashboard{
   background: #e9e9e9;
   background-size: cover;
-  
+
 }
 
 
