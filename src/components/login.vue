@@ -7,6 +7,12 @@
           <input v-model="userSignin.nombre" type="text" placeholder="Nombre">
           <input v-model="userSignin.identidad" type="text" placeholder="Identidad">
           <input v-model="userSignin.password" type="password" placeholder="Contraseña">
+          <div class="radiobotones-signup">
+            <input type="radio" name="radio-empleado" id="radio-empleado">
+            <label for="radio-empleado">Empleado</label>
+            <input type="radio" name="radio-empleado" id="radio-empleador">
+            <label for="radio-empleador">Empleador</label>
+          </div>
           <button>CREAR</button>
           <p class="message">Ya estas registrado? <a href="#" v-on:click="clickCrearCuenta()">Inicia Sesion!</a></p>
         </form>
@@ -160,5 +166,9 @@ export default {
   .wrapper-login{
     background: #76b852;
     height: 100vh;
+  }
+
+  .radiobotones-signup{
+    margin: 5px auto;
   }
 </style>
