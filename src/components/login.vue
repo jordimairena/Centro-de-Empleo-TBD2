@@ -8,12 +8,12 @@
           <input v-model="userSignin.identidad" type="text" placeholder="Identidad">
           <input v-model="userSignin.password" type="password" placeholder="Contraseña">
           <div class="radiobotones-signup">
-            <input v-model="userSignin.scope" type="radio" name="radio-empleado" id="radio-empleado">
+            <input v-model="userSignin.scope" value="empleado" type="radio" name="radio-empleado" id="radio-empleado" checked="checked">
             <label for="radio-empleado">Empleado</label>
-            <input v-model="userSignin.scope" type="radio" name="radio-empleado" id="radio-empleador">
+            <input v-model="userSignin.scope" type="radio" value="empleador" name="radio-empleado" id="radio-empleador">
             <label for="radio-empleador">Empleador</label>
           </div>
-          <button v-on:click="SignUp()">CREAR</button>
+          <button v-on:click="SignUp()" type="button">CREAR</button>
           <p class="message">Ya estas registrado? <a href="#" v-on:click="clickCrearCuenta()">Inicia Sesion!</a></p>
         </form>
         <form class="login-form">
@@ -40,7 +40,7 @@ export default {
         identidad:"",
         nombre:"",
         password:"",
-        scope:""
+        scope:"empleado"
       }
     }
   },
@@ -50,19 +50,19 @@ export default {
     },
     LogIn:function(){
       const {identidad, password} = this.userLogin;
-      alert("Login... id: " + identidad + "password: "+password);
-
-      sweetAlert(
-        'Good job!',
-        'You clicked the button!',
-        'success'
-      )
+      // alert("Login... id: " + identidad + "password: "+password);
+      //
+      // sweetAlert(
+      //   'Good job!',
+      //   'You clicked the button!',
+      //   'success'
+      // )
       //Cambiar el enlace de localhost a conveniencia.
       this.$http.post("http://localhost:8000/login", this.userLogin).then((res)=>{
         if (res.body.success === true) {
           localStorage.setItem("identidad", identidad);
           //Propongo usar scopes "empleado" o "empresa"
-          if (res.body.scope[0] === "empleado") {
+          if (res.body.scope === "empleado") {
             this.userLogin.identidad = "";
             this.userLogin.password = "";
 
@@ -72,8 +72,10 @@ export default {
               'success'
             )
 
+            localStorage.setItem("identidad", this.userLogin.id);
+            this.$router.push({path:"/home"});
             //Redireccionar al home del empleado
-          }else if(res.body.scope[0] === "empresa"){
+          }else if(res.body.scope === "empleador"){
             this.userLogin.identidad = "";
             this.userLogin.password = "";
 
@@ -83,6 +85,8 @@ export default {
               'success'
             )
 
+            localStorage.setItem("identidad", this.userLogin.id);
+            this.$router.push({path:"/home"});
             //Redireccionar al home de la empresa
           }
         }else if(res.body.success === false) {
@@ -95,26 +99,31 @@ export default {
           this.userLogin.password = "";
         }
       });
-    },SignUp:function(){
-      this.$http.post("http://localhost:8000/signup", this.userSignin).then((res) =>{
-        if (res.body.success === true) {
-
-          this.userSignin.nombre = "";
-          this.userSignin.identidad = "";
-          this.userSignin.password = "";
-
+    }, SignUp:function(){
+      const {nombre, identidad, password, scope} = this.userSignin;
+      this.$http.get(`http://localhost:8000/checkid/${identidad}`).then((res)=>{
+        if (res.body.existe === true) {
+          sweetAlert(
+            'Oops...',
+            'Ya existe una cuenta con esa identidad',
+            'error'
+          )
+        }else if (res.body.existe === false) {
           sweetAlert(
             'Good job!',
             'Bienvenido!',
             'success'
           )
-        } else if (res.body.success === false) {
-          sweetAlert(
-            'Oops...',
-            'Error!',
-            'error'
-          )
+          if (scope==="empleado") {
+            this.$router.push({name: 'empleado', params:{nombre, identidad, password, scope}})
+          }else if (scope === "empleador") {
+            // this.$router.push({name: 'empleador', params:{nombre, identidad, password, scope}})
+          }
         }
+        this.userSignin.nombre = "";
+        this.userSignin.identidad = "";
+        this.userSignin.password = "";
+        this.userSignin.scope = "empleado";
       })
     }
   }
