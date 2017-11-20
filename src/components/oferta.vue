@@ -28,7 +28,7 @@
       </div>
 
       <div class="carro col s12 m4 l4 xl4">
-        <p>¿Nesecita Carro?</p>
+        <p>¿Necesita Carro?</p>
         <input type="radio" name="carro" id="si" value="Si">
         <label for="si">Si</label>
         <input type="radio" name="carro" id="no" value="No" checked>
@@ -54,7 +54,7 @@
         <thead>
           <tr>
             <th>Experiencia Laboral</th>
-            <th>Experiencia Pofesional</th>
+            <th>Experiencia Profesional</th>
           </tr>
         </thead>
 
@@ -219,7 +219,7 @@ export default {
           }else{
             sweetalert({
               title: "Que mal!!!",
-              text: "Tu oferta de trabajo no se pude crear con exito!",
+              text: "Tu oferta de trabajo no se pudo crear con exito!",
               icon: "error",
             });
             this.oferta.puesto=" ";
@@ -232,6 +232,7 @@ export default {
             this.oferta.negociable=" ";
             this.oferta.contrato=" ";
             this.oferta.vacantes=" ";
+            $("#exp tbody tr").remove();
           }
         });
       }else{
@@ -249,12 +250,12 @@ export default {
         text: "Una vez que le de Aceptar sus datos se eliminaran.",
         icon: "warning",
         buttons: {
-          cancel: "Noo!, Quiero quiedarme!",
-          defeat: "Adios!"
+          cancel: "Noo!, Quiero quedarme!",
+          defeat: "Aceptar"
         },
       }).then((value)=>{
         if(value){
-          this.$router.push({path:"/#"});
+          this.$router.push({path:"/home"});
         }
       })
     },
