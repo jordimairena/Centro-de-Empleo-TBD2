@@ -117,7 +117,7 @@ export default {
           if (scope==="empleado") {
             this.$router.push({name: 'empleado', params:{nombre, identidad, password, scope}})
           }else if (scope === "empleador") {
-            // this.$router.push({name: 'empleador', params:{nombre, identidad, password, scope}})
+            this.$router.push({name: 'empleador', params:{nombre, identidad, password, scope}})
           }
         }
         this.userSignin.nombre = "";
