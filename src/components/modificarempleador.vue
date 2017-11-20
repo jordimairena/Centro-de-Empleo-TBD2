@@ -1,20 +1,61 @@
 <template lang="html">
   <div class="form-empleador">
     <div class="contenido">
-      <h3>Modificar Empresa</h3>
-      <input name="modificarempleador.nombreEmpresa" type="text"  placeholder="Nombre">
-      <input name="modificarempleador.rtn" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="13" maxlength="13" placeholder="RTN ">
-      <input name="modificarempleador.ceo" type="text"  placeholder="CEO ">
-      <input name="modificarempleador.Direccion" type="text" placeholder="Direccion ">
-      <input name="modificarempleador.Telefono" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="8" maxlength="8" placeholder="Numero de Telefono">
-      <a name="empleador.aceptar" class="waves-effect waves-light btn">  Aceptar</a>
+      <h3>{{empleador.nombre_empresa}}</h3>
+      <input v-model="empleador.nombre_empresa" type="text"  v-model="empleador.nombre_empresa">
+      <input v-model="empleador.rtn" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="13" maxlength="13" v-model="empleador.rtn ">
+      <input v-model="empleador.ceo" type="text"  v-model="empleador.ceo ">
+      <input v-model="empleador.direccion" type="text" v-model="empleador.direccion">
+      <input v-model="empleador.telefono" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="8" maxlength="8" v-model="empleador.telefono">
+      <input v-model="empleador.password" type="password" v-model="empleador.password">
+      <a name="empleador.aceptar" class="waves-effect waves-light btn" v-on:click="editEmpleador()">  Aceptar</a>
     </div>
   </div>
 </template>
 
 <script>
+import sweetAlert from 'sweetAlert'
 export default {
-}
+  data(){
+    return{
+      empleador:{
+      },
+      loading:false
+    }
+  },
+  methods:{
+    getEmpleador(){
+      localStorage.setItem("identidad","3333333333333");
+      var rtn = localStorage.getItem('identidad');
+				this.$http.get('http://localhost:8000/empleadores/searchbyRTN/'+rtn).then((response)=>{
+					this.empleador=response.body[0];
+          // console.log(response.body[0]);
+				});
+			}
+    },
+    editEmpleador(){
+      var _id= this.empleador._id;
+      this.$http.put('http://localhost:8000/empleadores/update/'+_id,this.empleador).then((response)=>{
+        if (response.body.suceess==true) {
+          sweetAlert({
+            title:"Correcto",
+            text:"Modificado con exito",
+            icon:"sucess"
+          });
+        }else{
+          sweetAlert(
+            'error',
+            'Error!',
+            'error'
+          )
+        }
+      }
+    },
+    beforeMount(){
+      this.getEmpleador();
+    }
+
+  }
 </script>
 
 <style lang="css">
