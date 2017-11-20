@@ -2,11 +2,11 @@
   <div class="lol">
     <div class="contenido">
       <h3>Nueva Empresa</h3>
-      <input v-model="empleador.nombreEmpresa" type="text"  placeholder="Nombre">
+      <input v-model="empleador.nombre_empresa" type="text"  placeholder="Nombre">
       <input v-model="empleador.rtn" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="13" maxlength="13" placeholder="RTN ">
       <input v-model="empleador.ceo" type="text"  placeholder="CEO ">
-      <input v-model="empleador.Direccion" type="text" placeholder="Direccion ">
-      <input v-model="empleador.Telefono" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="8" maxlength="8" placeholder="Numero de Telefono">
+      <input v-model="empleador.direccion" type="text" placeholder="Direccion ">
+      <input v-model="empleador.telefono" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="8" maxlength="8" placeholder="Numero de Telefono">
       <a name="empleador.aceptar" class="waves-effect waves-light btn" v-on:click="CreoEmpresa()">  Aceptar</a>
 
     </div>
@@ -19,41 +19,54 @@ export default {
   data(){
     return{
       empleador:{
-        nombreEmpresa: "",
+        nombre_empresa: "",
         rtn: "",
         ceo: "",
-        Direccion: "",
-        Telefono: ""
-      }
+        direccion: "",
+        telefono: ""
+      },
     }
   },
-  methods:{
-    CreoEmpresa:function(){
-      const {nombreEmpresa,rtn,ceo,Direccion,Telefono} = this.empleador;
-      // alert("Nombre Empresa: " + nombreEmpresa + "RTN: "+rtn);
-      if(this.empleador.nombreEmpresa.length===0 &&this.empleador.ceo.length===0 &&this.empleador.Direccion.length===0){
-        Materialize.toast('Un campo esta vacio!', 3000)
-      }else if (this.empleador.rtn.length != 13) {
-        // alert("length must be exactly 13 characters")
-        Materialize.toast('RTN debe contener 13 numeros', 3000)
-      }else if(this.empleador.Telefono.length !=8){
-        Materialize.toast('Numero de telefono invalido!', 3000)
-      }else{
-        sweetAlert(
-          'Good job!',
-          'You clicked the button!',
-          'success'
-        )
-        this.empleador.nombreEmpresa="";
-        this.empleador.rtn="";
-        this.empleador.ceo="";
-        this.empleador.Direccion="";
-        this.empleador.Telefono="";
-      }
-    }
-  }
-}
+    methods:{
+      //no se cierra bien
+      CreoEmpresa:function(){
+        const {nombreEmpresa,rtn,ceo,Direccion,Telefono} = this.empleador;
+        // alert("Nombre Empresa: " + nombreEmpresa + "RTN: "+rtn);
+        if(this.empleador.nombre_empresa.length===0 &&this.empleador.ceo.length===0 &&this.empleador.direccion.length===0){
+          Materialize.toast('Un campo esta vacio!', 3000)
+        }else if (this.empleador.rtn.length != 13) {
+          // alert("length must be exactly 13 characters")
+          Materialize.toast('RTN debe contener 13 numeros', 3000)
+        }else if(this.empleador.telefono.length !=8){
+          Materialize.toast('Numero de telefono invalido!', 3000)
+        }else{
+          //   sweetAlert(
+          //     'Good job!',
+          //     'You clicked the button!',
+          //     'success'
+          //   )
+        }
+          this.$http.post(`http://localhost:8000/empleadores/create`,this.empleador).then((response)=>{
+            if(response.body.success==true){
+              sweetAlert({
+                title: "Genial!!!",
+                text: "Empleador ha sido creado con exito!",
+                icon: "success",
+              });
+              this.empleador.nombre_empresa="";
+              this.empleador.rtn="";
+              this.empleador.ceo="";
+              this.empleador.direccion="";
+              this.empleador.telefono="";
+            }else {
+              alert("ijihiu");
+            }
+          });
 
+      },
+
+    },
+  }
 </script>
 
 <style lang="css">

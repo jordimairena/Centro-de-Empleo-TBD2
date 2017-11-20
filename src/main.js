@@ -34,7 +34,8 @@ const router = new VueRouter({
       name: 'empleador',
       path: '/newempleador',
       component: empleador
-    }
+    },
+  {
       name: 'Oferta',
       path: '/newoferta',
       component: oferta
