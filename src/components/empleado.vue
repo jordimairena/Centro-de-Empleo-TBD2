@@ -14,13 +14,13 @@
         <div class="civil col s12 m6 l6 xl6">
           <p>Estado Civil</p>
           <p class="estado">
-            <input type="radio" name="civil" id="soltero">
+            <input v-model="empleado.civil" type="radio" name="civil" id="soltero" value="soltero">
             <label for="soltero">Soltero</label>
-            <input type="radio" name="civil" id="casado">
+            <input v-model="empleado.civil" type="radio" name="civil" id="casado" value="casado">
             <label for="casado">Casado</label>
-            <input type="radio" name="civil" id="viudo">
+            <input v-model="empleado.civil" type="radio" name="civil" id="viudo" value="viudo">
             <label for="viudo">Viudo</label>
-            <input type="radio" name="civil" id="divorciado">
+            <input v-model="empleado.civil" type="radio" name="civil" id="divorciado" value="divorciado">
             <label for="divorciado">Divorciado</label>
           </p>
         </div>
@@ -28,13 +28,13 @@
         <div class="nacionalidad col s12 m6 l6 xl6">
           <div class="input-field col s12">
             <p>Nacionalidad</p>
-            <select>
-              <option value="" disabled selected>Escoja su Nacionalidad</option>
-              <option value="1">Hondureña</option>
-              <option value="2">Guatemalteca</option>
-              <option value="3">Salvadoreña</option>
-              <option value="4">Estadounidense</option>
-              <option value="5">Otro...</option>
+            <select v-model="empleado.nacionalidad" id="selectNacionalidad">
+              <option value="" disabled>Escoja su Nacionalidad</option>
+              <option value="hondureña">Hondureña</option>
+              <option value="guatemalteca">Guatemalteca</option>
+              <option value="salvadoreña">Salvadoreña</option>
+              <option value="estadounidense">Estadounidense</option>
+              <option value="Otro">Otro...</option>
             </select>
           </div>
         </div>
@@ -46,9 +46,9 @@
         <div class="gender col s12 m6 l6 xl6">
           <p>Genero</p>
           <p class="Genero">
-            <input type="radio" name="genero" id="m">
+            <input v-model="empleado.genero" type="radio" name="genero" id="m" value="masculino">
             <label for="m">Masculino</label>
-            <input type="radio" name="genero" id="f">
+            <input v-model="empleado.genero" type="radio" name="genero" id="f" value="femenino">
             <label for="f">Femenino</label>
           </p>
         </div>
@@ -71,24 +71,24 @@
       <div class="row">
         <div class="primaria col s12 m6 l6 xl6">
           <p>Educacion Primaria</p>
-          <input type="text" placeholder="Promedio">
-          <input type="text" placeholder="Centro de Estudio">
+          <input v-model="empleado.primaria_promedio" type="text" placeholder="Promedio">
+          <input v-model="empleado.primaria_centro" type="text" placeholder="Centro de Estudio">
         </div>
 
         <div class="secundaria col s12 m6 l6 xl6">
           <p>Educacion Secundaria</p>
-          <input type="text" placeholder="Promedio">
-          <input type="text" placeholder="Centro de Estudios">
-          <input type="text" placeholder="Carrera">
+          <input v-model="empleado.secundaria_promedio" type="text" placeholder="Promedio">
+          <input v-model="empleado.secundaria_centro" type="text" placeholder="Centro de Estudios">
+          <input v-model="empleado.secundaria_carrera" type="text" placeholder="Carrera">
         </div>
       </div>
 
       <div class="row">
         <div class="universidad col s12 m6 l6 xl6">
           <p>Educacion Universitaria</p>
-          <input type="text" placeholder="Promedio">
-          <input type="text" placeholder="Centro de Estudios">
-          <input type="text" placeholder="Carrera">
+          <input v-model="empleado.universidad_promedio" type="text" placeholder="Promedio">
+          <input v-model="empleado.universidad_centro" type="text" placeholder="Centro de Estudios">
+          <input v-model="empleado.universidad_carrera" type="text" placeholder="Carrera">
         </div>
 
         <div class="mas col s12 m6 l6 xl6">
@@ -123,23 +123,23 @@
       </div>
 
       <div class="requisito">
-        <input type="text" placeholder="Salario aspirado">
+        <input type="text" placeholder="Salario aspirado" v-model="empleado.salario_aspirado">
         <div class="contrato">
           <div class="input-field col s12">
             <p>Tipo de Contrato</p>
-            <select>
-              <option value="" disabled selected>Tipo de Contrato</option>
-              <option value="1">Full Time</option>
-              <option value="2">Half Time</option>
-              <option value="3">Remoto</option>
+            <select v-model="empleado.tipo_contrato" id="selectTipoContrato">
+              <option value="" disabled>Tipo de Contrato</option>
+              <option value="full-time">Full Time</option>
+              <option value="half-time">Half Time</option>
+              <option value="remoto">Remoto</option>
             </select>
           </div>
         </div>
-        <input type="text" placeholder="Puesto a Buscar">
+        <input type="text" placeholder="Puesto a Buscar" v-model="empleado.puesto_a_buscar">
       </div>
 
       <div class="boton">
-        <a class="waves-effect waves-light btn">Crear Perfil</a>
+        <a class="waves-effect waves-light btn" v-on:click="save()">Crear Perfil</a>
       </div>
     </div>
   </div>
@@ -155,6 +155,24 @@ export default {
         id:"",
         namePapa:"",
         nameMama:"",
+        civil:"soltero",
+        nacionalidad:"",
+        genero: "masculino",
+        primaria_promedio:"",
+        primaria_centro:"",
+        secundaria_promedio:"",
+        secundaria_centro:"",
+        secundaria_carrera:"",
+        secundaria_carrera:"",
+        universidad_promedio:"",
+        universidad_centro:"",
+        universidad_carrera:"",
+        salario_aspirado:"",
+        tipo_contrato:"",
+        puesto_a_buscar:"",
+        experiencia_laboral:[],
+        scope:"",
+        password:""
       },
       rows:[
       ],
@@ -164,10 +182,66 @@ export default {
     $(document).ready(function() {
       $('select').material_select();
     });
+  },mounted(){
+    const {nombre, identidad, password, scope} = this.$route.params;
+    // alert(nombre+" - "+identidad+" - "+password+" - "+scope)
+    // alert(this.$route.params.nombre)
+    this.empleado.name = nombre;
+    this.empleado.id = identidad;
+    this.empleado.password = password;
+    this.empleado.scope = scope;
   },
   methods:{
     addRow:function(){
       this.rows.push({});
+    }, save:function(){
+      var sec_nombreEmpresa= [];
+      var sec_meses=[];
+      var sec_puesto=[];
+      $("#exp tr").each(function(){
+          sec_nombreEmpresa.push($(this).find("td:first").text());
+      });
+
+      $("#exp tr").each(function(){
+          sec_meses.push($(this).find("td:nth-child(2)").text());
+      });
+      $("#exp tr").each(function(){
+          sec_puesto.push($(this).find("td:nth-child(3)").text());
+      });
+      var experiencia_laboral_temp = [];
+      for (var i = 0; i < sec_nombreEmpresa.length; i++) {
+        if (i > 0) {
+          const arreglo = {nombreEmpresa: sec_nombreEmpresa[i], meses: sec_meses[i], puesto: sec_puesto[i]}
+          experiencia_laboral_temp.push(arreglo);
+        }
+      }
+      this.experiencia_laboral = experiencia_laboral_temp;
+
+      this.empleado.nacionalidad = $('#selectNacionalidad').find(":selected").text();
+      this.empleado.tipo_contrato = $('#selectTipoContrato').find(":selected").text();
+
+
+      this.$http.post('http://localhost:8000/empleados/create', this.empleado).then((res)=>{
+        if (res.body.success === true) {
+          sweetAlert(
+            'Good job!',
+            'Bienvenido!',
+            'success'
+          )
+          localStorage.setItem("identidad", this.empleado.id);
+          localStorage.setItem("scope", this.empleado.scope);
+          this.$router.push({path:"/home"});
+        }else if (res.body.success === false) {
+          console.log(res.body.error);
+          sweetAlert(
+            'Oops...',
+            'Lo siento. Ocurrio un error.',
+            'error'
+          )
+        }
+      });
+      // this.empleado.laborales=sec_laborales;
+      // this.oferta.profesionales=sec_profesionales;
     }
 
   },
