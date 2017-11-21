@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="form-empleador">
     <div class="contenido">
-      <h3>{{empleador.nombre_empresa}}</h3>
+      <h3>Modificar Empresa</h3>
       <input v-model="empleador.nombre_empresa" type="text" >
       <input v-model="empleador.rtn" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="13" maxlength="13" >
       <input v-model="empleador.ceo" type="text" >
@@ -25,7 +25,7 @@ export default {
   },
   methods:{
     getEmpleador(){
-      localStorage.setItem("identidad","3333333333333");
+      localStorage.setItem("identidad","4444444444444");
       var rtn = localStorage.getItem('identidad');
       this.$http.get('http://localhost:8000/empleadores/searchbyRTN/'+rtn).then((response)=>{
         this.empleador=response.body[0];
@@ -35,19 +35,20 @@ export default {
     editEmpleador(){
       var _id= this.empleador._id;
       this.$http.put('http://localhost:8000/empleadores/update/'+_id,this.empleador).then((response)=>{
-        if (response.body.suceess==true) {
+        console.log(response.body);
+        if (response.body.success==true){           
           sweetAlert({
             title:"Correcto",
             text:"Modificado con exito",
             icon:"sucess"
           });
         }else{
-          sweetAlert(
-            'error',
-            'Error!',
-            'error'
-          )
-        }
+           sweetAlert(
+             'error',
+             'Error!',
+             'error'
+           )
+         }
       });
     }
   },
