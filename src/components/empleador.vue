@@ -34,7 +34,7 @@ export default {
   methods:{
     //no se cierra bien
     CreoEmpresa:function(){
-      const {nombreEmpresa,rtn,ceo,Direccion,Telefono} = this.empleador;
+      const {nombreEmpresa,rtn,ceo,direccion,telefono,password} = this.empleador;
       // alert("Nombre Empresa: " + nombreEmpresa + "RTN: "+rtn);
       if(this.empleador.nombre_empresa.length===0 &&this.empleador.ceo.length===0 &&this.empleador.direccion.length===0){
         Materialize.toast('Un campo esta vacio!', 3000)
@@ -67,10 +67,7 @@ export default {
           }
         });
       }
-
-
     },
-
   },
   mounted(){
     const {nombre, identidad, password, scope} = this.$route.params;
