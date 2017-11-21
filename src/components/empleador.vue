@@ -70,10 +70,7 @@ export default {
           }
         });
       }
-
-
     },
-
   },
   mounted(){
     const {nombre, identidad, password, scope} = this.$route.params;
