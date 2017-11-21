@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="lol">
+  <div class="contenedor">
     <div class="contenido">
       <h3>Nueva Empresa</h3>
       <input v-model="empleador.nombre_empresa" type="text"  placeholder="Nombre">
@@ -34,7 +34,7 @@ export default {
   methods:{
     //no se cierra bien
     CreoEmpresa:function(){
-      const {nombreEmpresa,rtn,ceo,Direccion,Telefono} = this.empleador;
+      const {nombreEmpresa,rtn,ceo,direccion,telefono,password} = this.empleador;
       // alert("Nombre Empresa: " + nombreEmpresa + "RTN: "+rtn);
       if(this.empleador.nombre_empresa.length===0 &&this.empleador.ceo.length===0 &&this.empleador.direccion.length===0){
         Materialize.toast('Un campo esta vacio!', 3000)
@@ -58,6 +58,9 @@ export default {
             this.empleador.telefono="";
             this.empleador.password="";
             this.empleador.scope="";
+            localStorage.setItem("identidad", this.empleador.rtn);
+            localStorage.setItem("scope", this.empleador.scope);
+            this.$router.push({path:"/home"});
           }else {
             sweetAlert(
               'Oops...',
@@ -97,7 +100,7 @@ export default {
   }
 
 
-  .lol{
+  .contenedor{
     margin: 0;
   }
   body{

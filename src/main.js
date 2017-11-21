@@ -13,6 +13,7 @@ import empleado from './components/empleado.vue'
 import udEmpleado from './components/udEmpleado.vue'
 import modificarempleador from './components/modificarempleador.vue'
 import udOferta from './components/udOferta.vue'
+import deleteEmpleado from './components/deleteEmpleado.vue'
 
 
 Vue.use(VueResouce);
@@ -49,6 +50,11 @@ const router = new VueRouter({
       name: 'empleado',
       path: '/newempleado',
       component: empleado
+    },
+    {
+      name: 'borrarEmpleado',
+      path: '/delEmpleado',
+      component: deleteEmpleado
     },
     {
       name: 'udempleado',
