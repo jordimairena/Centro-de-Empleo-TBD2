@@ -4,6 +4,7 @@
       <div class="nav-wrapper">
         <a href="#" class="brand-logo nav-brand-logo">Empresa</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li v-if="usuarioLogineado.scope === 'empleador'"><a v-on:click="crearOferta()">Crear Oferta Laboral</a></li>
           <li><a href="">Perfil</a></li>
           <li><a v-on:click="cerrarSesion()">Cerrar Sesion</a></li>
         </ul>
@@ -80,8 +81,8 @@ export default {
         const {ofertas_aplicadas} = res.body[0];
         for (var i = 0; i < ofertas_aplicadas.length; i++) {
           this.$http.get(`http://localhost:8000/ofertas/searchbyid/${ofertas_aplicadas[i]}`).then((res)=>{
-            this.ofertasAplicadas.push(res.body.tipo_puesto);
-            this.ofertasAplicadasIDs.push(res.body._id);
+            this.ofertasAplicadas.push(res.body.oferta.tipo_puesto);
+            this.ofertasAplicadasIDs.push(res.body.oferta._id);
           });
         }
       });
@@ -93,12 +94,12 @@ export default {
       const index = this.ofertasDisponibles.indexOf(oferta);
       const id = this.ofertasDisponiblesIDs[index];
       // alert(id);
-      this.$router.push({name: apoferta, params:{id}})
+      this.$router.push({name: "apoferta", params:{id}})
     },abrirOfertaAplicado:function(oferta){
       const index = this.ofertasAplicadas.indexOf(oferta);
       const id = this.ofertasAplicadasIDs[index];
       // alert(id);
-      this.$router.push({name: apoferta, params:{id}})
+      this.$router.push({name: "apoferta", params:{id}})
     },getOfertasDeTrabajoCreadas:function(){
       this.$http.get("http://localhost:8000/ofertas").then((res)=>{
         if (res.body.length > 0) {
@@ -118,7 +119,9 @@ export default {
       const index = this.ofertasCreadas.indexOf(oferta);
       const id = this.ofertasCreadasIDs[index];
       // alert(id);
-      this.$router.push({name: nombremiraroferta, params:{id}})
+      this.$router.push({name: "apoferta", params:{id}})
+    },crearOferta:function(){
+      this.$router.push({path:"/newoferta"})
     }
   },
   mounted(){
