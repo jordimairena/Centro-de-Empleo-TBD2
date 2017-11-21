@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="lol">
+  <div class="contenedor">
     <div class="contenido">
       <h3>Nueva Empresa</h3>
       <input v-model="empleador.nombre_empresa" type="text"  placeholder="Nombre">
@@ -100,7 +100,7 @@ export default {
   }
 
 
-  .lol{
+  .contenedor{
     margin: 0;
   }
   body{
