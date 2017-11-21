@@ -23,7 +23,7 @@ export default {
   methods:{
     deleteEmpleado(){
       var identificacion = localStorage.getItem('identidad');
-      this.$http.delete('http://localhost:8000/empleadores/deleteIdentificacion/'+identificacion).then((response)=>{
+      this.$http.delete('http://localhost:8000/empleados/deleteIdentificacion/'+identificacion).then((response)=>{
         if (response.body.success==true){
           sweetAlert({
             title:"Correcto",
