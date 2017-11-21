@@ -218,6 +218,7 @@ export default {
             this.oferta.contrato=" ";
             this.oferta.vacantes=" ";
             $("#exp tbody tr").remove();
+            this.$router.push({path:"/home"});
           }else{
             sweetalert({
               title: "Que mal!!!",
