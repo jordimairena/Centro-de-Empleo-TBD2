@@ -15,6 +15,7 @@ import modificarempleador from './components/modificarempleador.vue'
 import udOferta from './components/udOferta.vue'
 import eliminarempleador from './components/eliminarempleador.vue'
 import deleteEmpleado from './components/deleteEmpleado.vue'
+import apoferta from './components/apoferta.vue'
 
 
 
@@ -47,6 +48,11 @@ const router = new VueRouter({
       name: 'modificarempleador',
       path: '/modificarempleador',
       component: modificarempleador
+    },
+    {
+      name: 'apoferta',
+      path: '/aplicar_oferta',
+      component: apoferta
     },
     {
       name: 'empleado',
