@@ -71,7 +71,7 @@ export default {
               'You clicked the button!',
               'success'
             )
-
+            localStorage.setItem("scope", res.body.scope[0])
             //Redireccionar al home del empleado
           }else if(res.body.scope[0] === "empresa"){
             this.userLogin.identidad = "";
@@ -82,7 +82,7 @@ export default {
               'You clicked the button!',
               'success'
             )
-
+            localStorage.setItem("scope", res.body.scope[0])
             //Redireccionar al home de la empresa
           }
         }else if(res.body.success === false) {

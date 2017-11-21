@@ -11,9 +11,12 @@
     </nav>
     <ul class="collection with-header collection-ofertas ofertas-disponibles">
       <li class="collection-header"><h4>Ofertas de trabajo disponibles</h4></li>
-      <li class="collection-item"><div>Programador Senior de Java<i class="fa fa-circle ofertaNoDisponible secondary-content" aria-hidden="true" title="No Disponible"></i></div></li>
+      <!-- <li class="collection-item"><div>Programador Senior de Java<i class="fa fa-circle ofertaNoDisponible secondary-content" aria-hidden="true" title="No Disponible"></i></div></li>
       <li class="collection-item"><div>Intern Frontend Developer<i class="fa fa-circle secondary-content ofertaDisponible" aria-hidden="true" title="Disponible"></i></div></li>
-      <li class="collection-item"><div>QA Tester<i class="fa fa-circle ofertaDisponible secondary-content" aria-hidden="true" title="Disponible"></i></div></li>
+      <li class="collection-item"><div>QA Tester<i class="fa fa-circle ofertaDisponible secondary-content" aria-hidden="true" title="Disponible"></i></div></li> -->
+      <li class="collection-item" v-for="puesto in ofertasDisponibles">
+        <div>{{puesto}} <i class="fa fa-circle secondary-content ofertaDisponible"  aria-hidden="true" title="Disponible"></i></div>
+      </li>
     </ul>
     <ul class="collection with-header collection-ofertas">
       <li class="collection-header"><h4>Ofertas de trabajo aplicadas</h4></li>
@@ -34,16 +37,41 @@ export default {
 
   data(){
     return{
-
+      usuarioLogineado:{
+        identidad: "",
+        scope: ""
+      },
+      ofertasDisponibles:[],
+      ofertasAplicadas: []
     }
   }, methods:{
-
+    getOfertasDeTrabajoDisponibles:function(){
+      this.$http.get("http://localhost:8000/ofertas").then((res)=>{
+        if (res.body.length > 0) {
+          for (var i = 0; i < res.body.length; i++) {
+            if (res.body[i].vacantes > 0) {
+              this.ofertasDisponibles.push(res.body[i].tipo_puesto);
+            }
+          }
+        }
+      });
+    }, ofertasAplicadas:function(){
+      //Obtener los id de las ofertas aplicadas
+      //Obtener los nombres de los id
+    }
   },
   mounted(){
     $(document).ready(function(){
       const height = $('.wrapper-dashboard').height() + $('.nav-wrapper').height()+50;
       $('.wrapper-dashboard').css("height", height+"px");
     })
+    if (this.scope === "empleado") {
+      this.getOfertasDeTrabajoDisponibles();
+    }
+  },beforeMount(){
+    this.identidad = localStorage.getItem("identidad");
+    // this.scope = localStorage.getItem("scope");
+    this.scope = "empleado"
   }
 }
 </script>
