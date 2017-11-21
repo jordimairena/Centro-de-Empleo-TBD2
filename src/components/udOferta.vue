@@ -139,7 +139,8 @@ export default {
       $('select').material_select();
     });
 
-    this.oferta._id="5a121e7dfc0cc74a94fc7741"
+    // this.oferta._id="5a121e7dfc0cc74a94fc7741"
+    this.oferta._id=this.$route.params.id;
     this.$http.get(`http://localhost:8000/ofertas/searchbyid/`+this.oferta._id).then((response)=>{
       if(response.body.success===true){
 
