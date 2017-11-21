@@ -70,7 +70,11 @@
 
     <div class="boton">
       <p class="center-align">
-      <a class="waves-effect waves-light btn">Signup</a>
+      <div v-if="scope === 'empleador'">
+        <a class="waves-effect waves-light btn" v-on:click="modificar()">Modificar</a>
+        <a class="waves-effect waves-light btn red" v-on:click="Eliminar()">Eliminar</a>
+      </div>
+      <a v-else class="waves-effect waves-light btn" v-on:click="enroll()">Signup</a>
       <a class="waves-effect waves-light btn red" v-on:click="cancel()">Cancelar</a>
     </p>
 
@@ -101,11 +105,13 @@ export default {
       rows:[
 
       ],
+      scope:""
     }
   },
   beforeMount(){
     //this.oferta._id="5a121e7dfc0cc74a94fc7741"
     this.oferta._id = this.$route.params.id;
+    this.scope = localStorage.getItem("scope");
     this.$http.get(`http://localhost:8000/ofertas/searchbyid/`+this.oferta._id).then((response)=>{
       if(response.body.success===true){
 
@@ -123,6 +129,48 @@ export default {
   });
 },
 methods:{
+  cancel:function(){
+    this.$router.push({path:"/home"});
+  },
+  enroll:function(){
+    const id = localStorage.getItem("identidad");
+    this.$http.put("http://localhost:8000/enroll/"+id, this.oferta).then((res)=>{
+      if (res.body.success) {
+        sweetalert({
+          title: "Genial!!!",
+          text: "Gracias por aplicar!",
+          icon: "success",
+        });
+        this.$router.push({path:"/home"});
+      }
+    });
+  },modificar:function(){
+    this.$router.push({name:"udoferta", params:{id:this.oferta._id}});
+  },Eliminar:function(){
+    sweetalert({
+      title: "¿Esta seguro de eliminar esta oferta de trabajo?",
+      text: "Una vez que le de Aceptar los datos se eliminaran.",
+      icon: "warning",
+      buttons: {
+        cancel: "Noo!, Me Arrepiento!",
+        defeat: "Aceptar"
+      },
+    }).then((value)=>{
+      if(value){
+        this.$http.delete("http://localhost:8000/ofertas/delete/"+this.oferta._id).then((res)=>{
+          if (res.body.success) {
+            sweetalert({
+              title: "Genial!!!",
+              text: "Eliminado con exito!",
+              icon: "success",
+            });
+            this.$router.push({path:"/home"});
+          }
+        });
+
+      }
+    })
+  }
 },
 }
 </script>

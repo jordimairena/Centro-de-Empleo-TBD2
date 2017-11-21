@@ -127,7 +127,8 @@ export default {
         sueldo:'',
         negociable:'',
         contrato:'',
-        vacantes:''
+        vacantes:'',
+        id_empleador:''
       },
       rows:[
 
@@ -141,7 +142,7 @@ export default {
 
     // this.oferta._id="5a121e7dfc0cc74a94fc7741"
     this.oferta._id=this.$route.params.id;
-    this.$http.get(`http://localhost:8000/ofertas/searchbyid/`+this.oferta._id).then((response)=>{
+    this.$http.get("http://localhost:8000/ofertas/searchbyid/"+this.oferta._id).then((response)=>{
       if(response.body.success===true){
 
         this.oferta.puesto=response.body.oferta.tipo_puesto;
@@ -263,7 +264,8 @@ export default {
 
         this.oferta.laborales=sec_laborales;
         this.oferta.profesionales=sec_profesionales;
-
+        this.oferta.id_empleador = localStorage.getItem("identidad");
+        
         this.$http.put(`http://localhost:8000/ofertas/update/`+this.oferta._id,this.oferta).then((response)=>{
           if(response.body.success==true){
             sweetalert({
@@ -271,6 +273,7 @@ export default {
               text: "Tu oferta de trabajo ha sido actualizada con exito!",
               icon: "success",
             });
+            this.$router.push({path:"/home"});
           }else{
             sweetalert({
               title: "Que mal!!!",
