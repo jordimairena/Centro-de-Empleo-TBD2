@@ -63,6 +63,7 @@ export default {
           localStorage.setItem("identidad", identidad);
           //Propongo usar scopes "empleado" o "empresa"
           if (res.body.scope === "empleado") {
+            localStorage.setItem("identidad", this.userLogin.id);
             this.userLogin.identidad = "";
             this.userLogin.password = "";
 
@@ -73,10 +74,11 @@ export default {
             )
 
             localStorage.setItem("scope", res.body.scope)
-            localStorage.setItem("identidad", this.userLogin.id);
+
             this.$router.push({path:"/home"});
             //Redireccionar al home del empleado
           }else if(res.body.scope === "empleador"){
+            localStorage.setItem("identidad", this.userLogin.id);
             this.userLogin.identidad = "";
             this.userLogin.password = "";
 
@@ -87,7 +89,7 @@ export default {
             )
 
             localStorage.setItem("scope", res.body.scope)
-            localStorage.setItem("identidad", this.userLogin.id);
+
             this.$router.push({path:"/home"});
             //Redireccionar al home de la empresa
           }
