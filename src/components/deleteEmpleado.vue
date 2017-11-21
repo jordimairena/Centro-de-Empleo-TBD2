@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import sweetAlert from 'sweetAlert'
+import sweetAlert from 'sweetalert'
 export default {
   data(){
   },
