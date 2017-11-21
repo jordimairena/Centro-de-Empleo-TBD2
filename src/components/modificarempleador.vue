@@ -2,12 +2,12 @@
   <div class="form-empleador">
     <div class="contenido">
       <h3>{{empleador.nombre_empresa}}</h3>
-      <input v-model="empleador.nombre_empresa" type="text"  v-model="empleador.nombre_empresa">
-      <input v-model="empleador.rtn" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="13" maxlength="13" v-model="empleador.rtn ">
-      <input v-model="empleador.ceo" type="text"  v-model="empleador.ceo ">
-      <input v-model="empleador.direccion" type="text" v-model="empleador.direccion">
-      <input v-model="empleador.telefono" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="8" maxlength="8" v-model="empleador.telefono">
-      <input v-model="empleador.password" type="password" v-model="empleador.password">
+      <input v-model="empleador.nombre_empresa" type="text" >
+      <input v-model="empleador.rtn" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="13" maxlength="13" >
+      <input v-model="empleador.ceo" type="text" >
+      <input v-model="empleador.direccion" type="text">
+      <input v-model="empleador.telefono" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="8" maxlength="8">
+      <input v-model="empleador.password" type="password" >
       <a name="empleador.aceptar" class="waves-effect waves-light btn" v-on:click="editEmpleador()">  Aceptar</a>
     </div>
   </div>
@@ -27,11 +27,10 @@ export default {
     getEmpleador(){
       localStorage.setItem("identidad","3333333333333");
       var rtn = localStorage.getItem('identidad');
-				this.$http.get('http://localhost:8000/empleadores/searchbyRTN/'+rtn).then((response)=>{
-					this.empleador=response.body[0];
-          // console.log(response.body[0]);
-				});
-			}
+      this.$http.get('http://localhost:8000/empleadores/searchbyRTN/'+rtn).then((response)=>{
+        this.empleador=response.body[0];
+        // console.log(response.body[0]);
+      });
     },
     editEmpleador(){
       var _id= this.empleador._id;
@@ -49,17 +48,18 @@ export default {
             'error'
           )
         }
-      }
-    },
+      });
+    }
+  },
     beforeMount(){
       this.getEmpleador();
     }
+}
 
-  }
 </script>
 
-<style lang="css">
-.contenido{
+  <style lang="css">
+  .contenido{
     position: relative;
     z-index: 1;
     background-color: white;
@@ -90,4 +90,4 @@ export default {
     }
   }
 
-</style>
+  </style>
