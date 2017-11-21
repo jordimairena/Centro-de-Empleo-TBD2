@@ -60,10 +60,11 @@ export default {
       //Cambiar el enlace de localhost a conveniencia.
       this.$http.post("http://localhost:8000/login", this.userLogin).then((res)=>{
         if (res.body.success === true) {
+          alert(identidad);
           localStorage.setItem("identidad", identidad);
           //Propongo usar scopes "empleado" o "empresa"
           if (res.body.scope === "empleado") {
-            localStorage.setItem("identidad", this.userLogin.id);
+            // localStorage.setItem("identidad", this.userLogin.id);
             this.userLogin.identidad = "";
             this.userLogin.password = "";
 
@@ -78,7 +79,7 @@ export default {
             this.$router.push({path:"/home"});
             //Redireccionar al home del empleado
           }else if(res.body.scope === "empleador"){
-            localStorage.setItem("identidad", this.userLogin.id);
+            // localStorage.setItem("identidad", this.userLogin.id);
             this.userLogin.identidad = "";
             this.userLogin.password = "";
 
