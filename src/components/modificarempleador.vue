@@ -26,7 +26,6 @@ export default {
   },
   methods:{
     getEmpleador(){
-      localStorage.setItem("identidad","1111111111111");
       var rtn = localStorage.getItem('identidad');
       this.$http.get('http://localhost:8000/empleadores/searchbyRTN/'+rtn).then((response)=>{
         this.empleador=response.body[0];
