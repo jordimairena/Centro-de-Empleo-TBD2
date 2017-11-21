@@ -32,7 +32,7 @@
       </div>
 
       <div class="carro col s12 m4 l4 xl4">
-        <p>¿Nesecita Carro?</p>
+        <p>¿Necesita Carro?</p>
         <input type="radio" name="carro" id="si">
         <label for="si">Si</label>
         <input type="radio" name="carro" id="no" checked>
