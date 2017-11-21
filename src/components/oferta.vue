@@ -122,7 +122,8 @@ export default {
         sueldo:'',
         nogociable:'',
         contrato:'',
-        vacantes:''
+        vacantes:'',
+        id_empleador:'',
       },
       rows:[
 
@@ -133,6 +134,7 @@ export default {
     $(document).ready(function() {
       $('select').material_select();
     });
+    this.id_empleador=localStorage.getItem("id");
   },
   methods:{
     addRow:function(){
