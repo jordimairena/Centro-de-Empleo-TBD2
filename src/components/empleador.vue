@@ -58,6 +58,9 @@ export default {
             this.empleador.telefono="";
             this.empleador.password="";
             this.empleador.scope="";
+            localStorage.setItem("identidad", this.empleador.rtn);
+            localStorage.setItem("scope", this.empleador.scope);
+            this.$router.push({path:"/home"});
           }else {
             sweetAlert(
               'Oops...',
