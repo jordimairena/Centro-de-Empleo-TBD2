@@ -72,7 +72,7 @@ export default {
               'success'
             )
 
-            localStorage.setItem("scope", res.body.scope[0])
+            localStorage.setItem("scope", res.body.scope)
             localStorage.setItem("identidad", this.userLogin.id);
             this.$router.push({path:"/home"});
             //Redireccionar al home del empleado
@@ -86,7 +86,7 @@ export default {
               'success'
             )
 
-            localStorage.setItem("scope", res.body.scope[0])
+            localStorage.setItem("scope", res.body.scope)
             localStorage.setItem("identidad", this.userLogin.id);
             this.$router.push({path:"/home"});
             //Redireccionar al home de la empresa
